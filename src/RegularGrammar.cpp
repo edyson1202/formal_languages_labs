@@ -1,23 +1,10 @@
 #include "RegularGrammar.h"
 
 #include <random>
+
 std::random_device rd;
-
-//
-// Engines 
-//
 std::mt19937 e2(rd());
-//std::knuth_b e2(rd());
-//std::default_random_engine e2(rd()) ;
-
-//
-// Distribtuions
-//
 std::uniform_real_distribution<> dist(0, 1);
-//std::normal_distribution<> dist(2, 2);
-//std::student_t_distribution<> dist(5);
-//std::poisson_distribution<> dist(2);
-//std::extreme_value_distribution<> dist(0,2);
 
 RegularGrammar::RegularGrammar(const std::vector<std::string> production_rule) {
 	m_Rules_count = production_rule.size();
@@ -59,37 +46,34 @@ RegularGrammar::RegularGrammar(const std::vector<std::string> production_rule) {
 				}
 		}
 	}
-	//PrintNonTerminals();
-	//PrintRules();
 }
 std::string RegularGrammar::GenerateString() {
-	std::string word = "";
+	std::string word;
 	do {
+		word = "";
 		Derive(m_NT, word);
 	} while (word.length() < 5);
 
 	return word;
 }
-FiniteAutomaton* RegularGrammar::ToFiniteAutomaton() {
-	return nullptr;
-}
 void RegularGrammar::PrintNonTerminals()
 {
 	for (uint32_t i = 0; i < m_NT_count; i++) {
-		std::cout << m_NT[i].symbol << "\nRules count: " << m_NT[i].rules_count << "\nRule address: "
-			<< m_NT[i].rule_address << "\n";
+		std::cout << m_NT[i].symbol << " Rules count: " << m_NT[i].rules_count << "\n";
 	}
+	std::cout << "\n";
 }
 void RegularGrammar::PrintRules()
 {
-	std::cout << m_Rules_count << std::endl;
+	std::cout << "Rules count: " << m_Rules_count << "\n";
 	for (uint32_t i = 0; i < m_Rules_count; i++) {
-		std::cout << "Terminal: " << m_Rules[i].terminal << "\nNonTerminal: \n";
+		std::cout << "Terminal: " << m_Rules[i].terminal << " NonTerminal: ";
 		if (m_Rules[i].NT_address != nullptr)
 			std::cout << m_Rules[i].NT_address->symbol << '\n';
 		else
 			std::cout << "nullptr\n";
 	}
+	std::cout << "\n";
 }
 void RegularGrammar::Derive(NonTerminal* NT, std::string& word) {
 	uint32_t random_offset = uint32_t(NT->rules_count * dist(e2));

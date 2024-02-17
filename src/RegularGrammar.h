@@ -5,8 +5,7 @@
 #include <vector>
 #include <iostream>
 
-#include "FiniteAutomaton.h"
-
+class FiniteAutomaton;
 
 struct Rule;
 struct NonTerminal {
@@ -23,7 +22,12 @@ public:
 	RegularGrammar(const std::vector<std::string> production_rules);
 
 	std::string GenerateString();
-	FiniteAutomaton* ToFiniteAutomaton();
+
+	NonTerminal* GetNonTerminals() const { return m_NT; }
+	uint32_t GetNonTerminalsCount() const { return m_NT_count; }
+	Rule* GetRules() const { return m_Rules; }
+	uint32_t GetRulesCount() const { return m_Rules_count; }
+	Rule* GetRules() { return m_Rules; }
 
 	void PrintNonTerminals();
 	void PrintRules();
