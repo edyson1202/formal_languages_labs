@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\FiniteAutomaton.h" />
+    <ClInclude Include="src\InputData.h" />
     <ClInclude Include="src\RegularGrammar.h" />
   </ItemGroup>
   <ItemGroup>

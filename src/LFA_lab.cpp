@@ -12,30 +12,19 @@
 
 int main()
 {
-    RegularGrammar grammar(production_rules_08);
-    grammar.PrintNonTerminals();
-    grammar.PrintRules();
+    RegularGrammar grammar(production_rules_24);
 
     std::vector<std::string> strings;
     for (uint32_t i = 0; i < 5; i++) {
-        std::string word;
-        word = grammar.GenerateString();
-
-        //std::cout << word << std::endl;
-        strings.emplace_back(word);
+        strings.emplace_back(grammar.GenerateString());
+        std::cout << strings.back() << "\n";
     }
 
     FiniteAutomaton daf(grammar);
-    daf.PrintStates();
-    daf.PrintTransitions();
-    for (std::string& str : strings) {
-        std::cout << str << "\n";
-        if (daf.IsStringAccepted(str)) {
-            std::cout << "True\n";
-        }
-        else
-            std::cout << "False\n";
-    }
+    for (std::string& str : strings)
+        std::cout << str << "\n" << (daf.IsStringAccepted(str) ? "True\n" : "False\n");
+
+    std::cout << (daf.IsStringAccepted("abc") ? "True\n" : "False\n");
 
     return 0;
 }

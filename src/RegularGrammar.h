@@ -5,13 +5,32 @@
 #include <vector>
 #include <iostream>
 
-class FiniteAutomaton;
+struct ProductionRule {
+	char A;
+	char terminal;
+	char non_terminal;
+};
+struct RegularGrammarDefinition {
+	std::vector<char> non_terminals;
+	std::vector<char> terminals;
+	std::string start_symbol;
+	std::vector<ProductionRule> production_rules;
 
+	const std::vector<char>& GetNonTerminals() const { return non_terminals; }
+	const std::vector<char>& GetTerminals() const { return terminals; }
+	const std::vector<ProductionRule>& GetProductionRules() const { return production_rules; }
+
+	void PrintTerminals();
+	void PrintProductionRules();
+};
+class FiniteAutomaton;
 struct Rule;
 struct NonTerminal {
 	char symbol = '\0';
 	uint32_t rules_count = 0;
 	Rule* rule_address = nullptr;
+
+	const Rule* GetRandomRule() const;
 };
 struct Rule {
 	char terminal;
@@ -20,24 +39,22 @@ struct Rule {
 class RegularGrammar {
 public:
 	RegularGrammar(const std::vector<std::string> production_rules);
+	~RegularGrammar() = default;
+
+	void CreateGrammarDefinition(RegularGrammarDefinition& grammar_def, 
+		const std::vector<std::string>& input);
 
 	std::string GenerateString();
 
-	NonTerminal* GetNonTerminals() const { return m_NT; }
-	uint32_t GetNonTerminalsCount() const { return m_NT_count; }
-	Rule* GetRules() const { return m_Rules; }
-	uint32_t GetRulesCount() const { return m_Rules_count; }
-	Rule* GetRules() { return m_Rules; }
+	const RegularGrammarDefinition& GetGrammarDefinition() const { return m_GrammarDef; }
 
 	void PrintNonTerminals();
 	void PrintRules();
-
 private:
-	void Derive(NonTerminal* NT, std::string& word);
+	void Derive(const NonTerminal* NT, std::string& word);
 private:
-	NonTerminal* m_NT;
-	Rule* m_Rules;
-
-	uint32_t m_NT_count = 0;
-	uint32_t m_Rules_count = 0;
+	std::vector<NonTerminal> m_NT;
+	std::vector<Rule> m_Rules;
+	
+	RegularGrammarDefinition m_GrammarDef;
 };
