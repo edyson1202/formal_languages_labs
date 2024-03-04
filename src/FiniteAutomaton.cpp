@@ -202,13 +202,6 @@ void FiniteAutomaton::PrintStates()
 }
 void FiniteAutomaton::PrintTransitions()
 {
-	//for (uint32_t i = 0; i < m_States.size() * 26; i++) {
-	//	if (m_Transitions[i] == nullptr)
-	//		continue;
-	//	std::cout << "Transition: " << (char)((i % 26) + 'a') << " -> "
-	//		<< m_Transitions[i]->symbol << '\n';
-	//}
-	//std::cout << "\n";
 	std::cout << "Automaton transitions: \n";
 	for (uint32_t i = 0; i < m_FADefinition.delta.size(); i++) {
 		std::cout << "Src: " << m_FADefinition.delta[i].src_state << 

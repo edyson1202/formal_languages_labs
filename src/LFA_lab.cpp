@@ -12,7 +12,7 @@
 // these requirements will be droped
 
 // Automaton
-// 1. Transition function should have source states in order
+// 1. Transition function should have source states in sorted
 
 int main()
 {
