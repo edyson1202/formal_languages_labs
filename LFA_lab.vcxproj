@@ -128,11 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\FiniteAutomaton.cpp" />
+    <ClCompile Include="src\Grammar.cpp" />
     <ClCompile Include="src\LFA_lab.cpp" />
     <ClCompile Include="src\RegularGrammar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\FiniteAutomaton.h" />
+    <ClInclude Include="src\Grammar.h" />
     <ClInclude Include="src\InputData.h" />
     <ClInclude Include="src\RegularGrammar.h" />
   </ItemGroup>

@@ -5,28 +5,29 @@
 #include <vector>
 #include <iostream>
 
+struct FiniteAutomatonDefinition;
 struct ProductionRule {
-	char A;
+	std::string A;
 	char terminal;
-	char non_terminal;
+	std::string non_terminal;
 };
 struct RegularGrammarDefinition {
-	std::vector<char> non_terminals;
+	std::vector<std::string> non_terminals;
 	std::vector<char> terminals;
 	std::string start_symbol;
 	std::vector<ProductionRule> production_rules;
 
-	const std::vector<char>& GetNonTerminals() const { return non_terminals; }
+	const std::vector<std::string>& GetNonTerminals() const { return non_terminals; }
 	const std::vector<char>& GetTerminals() const { return terminals; }
 	const std::vector<ProductionRule>& GetProductionRules() const { return production_rules; }
 
-	void PrintTerminals();
-	void PrintProductionRules();
+	void PrintTerminals() const;
+	void PrintProductionRules() const;
 };
 class FiniteAutomaton;
 struct Rule;
 struct NonTerminal {
-	char symbol = '\0';
+	std::string symbol;
 	uint32_t rules_count = 0;
 	Rule* rule_address = nullptr;
 
@@ -39,10 +40,13 @@ struct Rule {
 class RegularGrammar {
 public:
 	RegularGrammar(const std::vector<std::string> production_rules);
+	RegularGrammar(const FiniteAutomaton& automaton);
 	~RegularGrammar() = default;
 
-	void CreateGrammarDefinition(RegularGrammarDefinition& grammar_def, 
-		const std::vector<std::string>& input);
+	void InitRegularGrammar();
+
+	void CreateGrammarDefinition(const std::vector<std::string>& input);
+	void CreateGrammarDefinitionFromFA(const FiniteAutomatonDefinition& fa_def);
 
 	std::string GenerateString();
 

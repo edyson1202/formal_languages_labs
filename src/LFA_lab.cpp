@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "Grammar.h"
 #include "RegularGrammar.h"
 #include "FiniteAutomaton.h"
 #include "InputData.h"
@@ -10,21 +11,48 @@
 // If functionality to transform input into the required format will be implemented later
 // these requirements will be droped
 
+// Automaton
+// 1. Transition function should have source states in order
+
 int main()
 {
-    RegularGrammar grammar(production_rules_24);
+    // LAB 01
+    /*
+    {
+        RegularGrammar grammar(production_rules_24);
+        FiniteAutomaton daf(grammar);
 
-    std::vector<std::string> strings;
-    for (uint32_t i = 0; i < 5; i++) {
-        strings.emplace_back(grammar.GenerateString());
-        std::cout << strings.back() << "\n";
+        for (uint32_t i = 0; i < 5; i++) {
+            std::string str;
+            str = grammar.GenerateString();
+            std::cout << str << "\n";
+            std::cout << str << "\n" << (daf.IsStringAccepted(str) ? "True\n" : "False\n");
+        }
+        std::string str = "abc";
+        std::cout << str << "\n" << (daf.IsStringAccepted(str) ? "True\n" : "False\n");
+    }
+    */
+
+    FiniteAutomaton daf(automaton_22);
+
+    daf.PrintStates();
+    daf.PrintTransitions();
+
+    RegularGrammar grammar(daf);
+
+    grammar.PrintNonTerminals();
+    grammar.GetGrammarDefinition().PrintProductionRules();
+
+    for (uint32_t i = 0; i < 1000; i++) {
+        std::string str = grammar.GenerateString();
+
+        if (!daf.IsStringAccepted(str))
+            std::cout << "fail!" << "\n";
     }
 
-    FiniteAutomaton daf(grammar);
-    for (std::string& str : strings)
-        std::cout << str << "\n" << (daf.IsStringAccepted(str) ? "True\n" : "False\n");
+    //Grammar grammar(production_rules_test);
 
-    std::cout << (daf.IsStringAccepted("abc") ? "True\n" : "False\n");
+    //std::cout << "Type: " << grammar.GetGrammarType() << "\n";
 
     return 0;
 }

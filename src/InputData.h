@@ -3,6 +3,43 @@
 #include <vector>
 #include <string>
 
+std::vector<std::string> Q_22 = { "q0", "q1", "q2" };
+std::vector<std::string> sigma_22{ "a", "b" };
+std::vector<std::string> F_22 = { "q2" };
+std::vector<std::string> transition_function_22 = {
+    "q0,a,q0",
+    "q0,b,q1",
+    "q1,b,q1",
+    "q1,b,q2",
+    "q1,a,q0",
+    "q2,b,q1"
+};
+std::vector<std::vector<std::string>> automaton_22 = { Q_22, sigma_22, F_22, transition_function_22 };
+
+std::vector<std::string> Q = { "q0", "q1", "q2" };
+std::vector<std::string> sigma{ "a", "b" };
+std::vector<std::string> F = { "q2" };
+std::vector<std::string> transition_function = {
+    "q0,a,q0",
+    "q0,b,q0",
+    "q0,b,q1",
+    "q1,a,q1",
+    "q1,b,q2",
+    "q2,a,q2"
+};
+std::vector<std::vector<std::string>> automaton_24 = { Q, sigma, F, transition_function };
+
+std::vector<std::string> production_rules_test = {
+    "S-a,P",
+    "S-b,Q",
+    "P-b,P",
+    "P-c,P",
+    "P-d,Q",
+    "P-e",
+    "Q-e,Q",
+    "Q-f,Q",
+    "Q-a"
+};
 std::vector<std::string> production_rules_01 = {
     "S,aP",
     "S,bQ",
