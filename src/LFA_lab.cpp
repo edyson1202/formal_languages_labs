@@ -4,6 +4,7 @@
 #include "RegularGrammar.h"
 #include "FiniteAutomaton.h"
 #include "InputData.h"
+#include "Lexer.h"
 
 
 // REQUIRED FORMAT
@@ -14,6 +15,7 @@
 // Automaton
 // 1. Transition function should have source states in sorted
 
+std::string source_code = " \"my string\"// this is a comment\n(()) {} // grouping \"inside\" stuff\n!*+-/= <54.12> if else<= # 2==for // operators";
 int main()
 {
     // LAB 01
@@ -33,6 +35,8 @@ int main()
     }
     */
 
+    // LAB 02
+    /*
     FiniteAutomaton daf(automaton_22);
 
     daf.PrintStates();
@@ -53,6 +57,13 @@ int main()
     //Grammar grammar(production_rules_test);
 
     //std::cout << "Type: " << grammar.GetGrammarType() << "\n";
+    */
+
+    // LAB 03
+    std::cout << "Source code:\n\n" << source_code << "\n\n";
+    Lexer lexer(source_code);
+    lexer.ScanTokens();
+    lexer.PrintTokens();
 
     return 0;
 }
