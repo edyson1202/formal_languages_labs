@@ -86,14 +86,6 @@ void Lexer::AddToken(TokenType type, const std::string& lexeme)
 {
 	m_Tokens.emplace_back(Token(type, m_Line, lexeme));
 }
-
-bool Lexer::IsAtEnd()
-{
-	if (m_CurrentChar < m_Source.length())
-		return false;
-	return true;
-}
-
 bool Lexer::IsCurrentChar(char c)
 {
 	if (m_CurrentChar >= m_Source.length())
@@ -107,9 +99,9 @@ bool Lexer::IsCurrentChar(char c)
 
 void Lexer::String()
 {
-	while (m_Source[m_CurrentChar] != '"' && !IsAtEnd())
+	while (Peek() != '"' && !IsAtEnd())
 	{
-		if (m_Source[m_CurrentChar] == '\n')
+		if (Peek() == '\n')
 			m_Line++;
 		m_CurrentChar++;
 	}
@@ -148,5 +140,5 @@ void Lexer::Identifier()
 	if (Token::IsKeyWord(identifier))
 		type = Token::GetKeywordTokenType(identifier);
 
-	AddToken(type);
+	AddToken(type, identifier);
 }

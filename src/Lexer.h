@@ -17,7 +17,7 @@ private:
 	void AddToken(TokenType type);
 	void AddToken(TokenType type, const std::string& lexeme);
 
-	bool IsAtEnd();
+	bool IsAtEnd() { return !(m_CurrentChar < m_Source.length()); }
 	bool IsCurrentChar(char c);
 	inline char Peek() { return m_Source[m_CurrentChar]; }
 	inline char PeekNext() { return m_Source[m_CurrentChar + 1]; }

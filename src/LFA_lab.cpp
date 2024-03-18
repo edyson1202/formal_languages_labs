@@ -15,7 +15,7 @@
 // Automaton
 // 1. Transition function should have source states in sorted
 
-std::string source_code = " \"my string\"// this is a comment\n(()) {} // grouping \"inside\" stuff\n!*+-/= <54.12> if else<= # 2==for // operators";
+std::string source_code = " \"my string\" text// this is a comment\n(()) {} // grouping \"inside\" stuff\n!*+-/= <54.12> if else<= # 2==for // operators";
 int main()
 {
     // LAB 01
